@@ -36,6 +36,7 @@
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
     "package": "pnpm vsce package",
     "publish": "pnpm vsce publish",
+    "semantic-release": "semantic-release",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "pnpm run compile && pnpm run lint",

@@ -15,7 +15,6 @@ jobs:
         uses: pnpm/action-setup@v2.2.3
         with:
           version: 7
-          run_install: false
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -28,9 +27,8 @@ jobs:
 
       - name: Release
         run: |
-          pnpx vsce verify-pat scarf --pat $VSCE_PAT
           echo path is: "${PWD}/node_modules/.bin:${PATH}"
-          PATH="${PWD}/node_modules/.bin:${PATH}" pnpx semantic-release
+          PATH="${PWD}/node_modules/.bin:${PATH}" pnpm run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VSCE_PAT: ${{ secrets.VSCE_TOKEN }}
