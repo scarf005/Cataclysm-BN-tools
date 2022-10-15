@@ -1,68 +1,6 @@
-import re
-from pprint import pprint
-from textwrap import dedent
-from typing import TYPE_CHECKING, Any, Literal, Type, Union
+from pydantic import BaseModel
 
-from pydantic import BaseModel, Field, conlist, constr, create_model
-
-if TYPE_CHECKING:
-    ID = str
-    String = str
-    List = list
-else:
-    ID = constr(regex=r"^[a-zA-Z0-9_]+$")
-    String = constr(min_length=1)
-    List = conlist(min_items=1, item_type=String)
-
-
-def to_classname(text: str) -> str:
-    return "".join(t.capitalize() for t in text.split("_"))
-
-
-def fold_text(text: str) -> str:
-    "replace all whitespaces into single space"
-    return re.sub(r"\s+", " ", text)  # type: ignore
-
-
-def field(*args: str, fold: bool = True, **kwargs: Any):
-    """one args: description, two args: default, description"""
-
-    match len(args):
-        case 1:
-            default, description = ..., args[0]
-        case 2:
-            default, description = args  # type: ignore
-
-        case _:
-            raise ValueError(
-                f"field() takes 1 or 2 positional arguments, but got {args}"
-            )
-
-    desc = (fold_text if fold else dedent)(description)  # type: ignore
-    return Field(
-        default,
-        description=desc,
-        markdownDescription=desc,
-        **kwargs,
-    )
-
-
-def enum_model(
-    name: str, *args: str, fold: bool = True, **kwargs: Any
-) -> Type[BaseModel]:
-    """one args: description, two args: default, description"""
-
-    return create_model(
-        to_classname(name),
-        __root__=(Literal[name], field(*args, fold=fold, **kwargs)),  # type: ignore
-        __base__=BaseModel,
-    )
-
-
-def enums_from(data: dict[str, str]) -> Any:
-    categories_classes = (enum_model(k, v) for k, v in data.items())
-    return Union[*categories_classes]  # type: ignore
-
+from schema.utils import ID, JList, JStr, enums_from, field
 
 Category = enums_from(
     {
@@ -98,7 +36,7 @@ Category = enums_from(
 
 
 class ModInfo(BaseModel):
-    type_: String = field(
+    type_: JStr = field(
         "MOD_INFO", "Identifier for ModInfo object.", alias="type", const=True
     )
     id_: ID = field(
@@ -106,9 +44,9 @@ class ModInfo(BaseModel):
         numbers and underscore for clarity.""",
         alias="id",
     )
-    name: String = field("Mod's display name, in `English`.")
-    authors: List[String] = field("Original author(s) of the mod.")
-    description: String = field("Mod's description, in `English`.")
+    name: JStr = field("Mod's display name, in `English`.")
+    authors: JList[JStr] = field("Original author(s) of the mod.")
+    description: JStr = field("Mod's description, in `English`.")
     category: Category = field(  # type: ignore
         """The `category` attribute denotes
         where the mod will appear in the mod selection menu.
@@ -118,7 +56,7 @@ class ModInfo(BaseModel):
         Pick whichever one applies best to your mod
         when writing your modinfo file.""",
     )
-    dependencies: List[String] = field(
+    dependencies: JList[JStr] = field(
         """The `dependencies` attribute is used to tell Cataclysm
         that your mod is dependent on something present in another mod.
         If you have no dependencies outside of the core game,
@@ -131,11 +69,3 @@ class ModInfo(BaseModel):
 
 class ModInfoFile(BaseModel):
     __root__: ModInfo | list[ModInfo]
-
-
-if __name__ == "__main__":
-    schema = ModInfoFile.schema()
-
-    from pathlib import Path
-
-    Path("data/modinfo.json").write_text(ModInfoFile.schema_json(indent=2))
