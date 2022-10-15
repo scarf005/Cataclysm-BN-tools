@@ -23,27 +23,35 @@ def fold_text(text: str) -> str:
     return re.sub(r"\s+", " ", text)  # type: ignore
 
 
-def field(*args: str, fold: bool = True, **kwargs: Any):
+def get_desc(text: str, fold: bool = True):
+    return (fold_text if fold else dedent)(text)
+
+
+def optfield(*args: Any, fold: bool = True, **kwargs: Any):
     """one args: description, two args: default, description"""
 
-    match len(args):
-        case 1:
-            default, description = ..., args[0]
-        case 2:
-            default, description = args  # type: ignore
+    desc = get_desc(args[-1], fold=fold)
 
+    args_dict: dict[str, Any] = {
+        "description": desc,
+        "markdownDescription": desc,
+    }
+
+    match args:
+        case [str()]:
+            ...
+        case [_, str()]:
+            args_dict["default"] = args[0]
         case _:
             raise ValueError(
                 f"field() takes 1 or 2 positional arguments, but got {args}"
             )
 
-    desc = (fold_text if fold else dedent)(description)  # type: ignore
-    return Field(
-        default,
-        description=desc,
-        markdownDescription=desc,
-        **kwargs,
-    )
+    return Field(**(args_dict | kwargs))
+
+
+def field(desc: str, fold: bool = True, **kwargs: Any):
+    return optfield(..., desc, fold=fold, **kwargs, required=True)
 
 
 def enum_model(
@@ -53,7 +61,7 @@ def enum_model(
 
     return create_model(
         to_classname(name),
-        __root__=(Literal[name], field(*args, fold=fold, **kwargs)),  # type: ignore
+        __root__=(Literal[name], optfield(*args, fold=fold, **kwargs)),  # type: ignore
         __base__=BaseModel,
     )
 
