@@ -1,8 +1,10 @@
+from pprint import pprint
 import re
 from textwrap import dedent
-from typing import TYPE_CHECKING, Any, Literal
+from typing import TYPE_CHECKING, Any, Literal, Type
 
-from pydantic import BaseModel, Extra, Field, conlist, constr, create_model
+from pydantic import BaseModel, Field, conlist, constr, create_model
+from pydantic.fields import FieldInfo
 
 if TYPE_CHECKING:
     ID = str
@@ -13,27 +15,30 @@ else:
     String = constr(min_length=1)
     List = conlist(min_items=1, item_type=String)
 
+def to_classname(text: str) -> str:
+    return "".join(t.capitalize() for t in text.split("_"))
+
 
 def fold_text(text: str) -> str:
     "replace all whitespaces into single space"
-    return re.sub(r"\s+", " ", text)
+    return re.sub(r"\s+", " ", text)  # type: ignore
 
 
-def field(*args: str, fold=True, **kwargs):  # type: ignore
+def field(*args: str, fold: bool = True, **kwargs: Any):
     """one args: description, two args: default, description"""
 
     match len(args):
         case 1:
             default, description = ..., args[0]
         case 2:
-            default, description = args # type: ignore
+            default, description = args  # type: ignore
 
         case _:
             raise ValueError(
                 f"field() takes 1 or 2 positional arguments, but got {args}"
             )
 
-    desc = (fold_text if fold else dedent)(description) # type: ignore
+    desc = (fold_text if fold else dedent)(description)  # type: ignore
     return Field(
         default,
         description=desc,
@@ -42,100 +47,49 @@ def field(*args: str, fold=True, **kwargs):  # type: ignore
     )
 
 
-f = field(
-    """A mod that adds a lot of stuff.
-        Typically reserved for very large mods or
-        complete game overhauls
-        (eg: Core game files, Aftershock)""",
-)
+def enumModel(name: str, *args: str, fold: bool = True, **kwargs: Any):
+    """one args: description, two args: default, description"""
 
-
-class Content(BaseModel):
-    __root__: Literal["content"] = field(
-        """A mod that adds a lot of stuff.
-        Typically reserved for very large mods or
-        complete game overhauls
-        (eg: Core game files, Aftershock)""",
+    return create_model(
+        to_classname(name),
+        __root__=(Literal[name], field(*args, fold=fold, **kwargs)),  # type: ignore
+        __base__=BaseModel,
     )
 
 
-# Content = create_model(
-# "Content", __root__=(Literal["content"], f), __base__=BaseModel
-# )
+categories = {
+    "content": """A mod that adds a lot of stuff.
+                  Typically reserved for very large mods or
+                  complete game overhauls
+                  (eg: Core game files, Aftershock)""",
+    "items": """A mod that adds new items and recipes to the game
+                (eg: More survival tools)""",
+    "creatures": """A mod that adds new creatures or NPCs to the game
+                    (eg: Modular turrets)""",
+    "misc_additions": """Miscellaneous content additions to the game
+                         (eg: Alternative map key, Crazy cataclysm)""",
+    "buildings": """New overmap locations and structures
+                    (eg: Fuji's more buildings).
+                    If you're blacklisting buildings from spawning,
+                    this is also a usable category
+                    (eg: No rail stations).""",
+    "vehicles": """New cars or vehicle parts
+                   (eg: Tanks and  vehicles)""",
+    "rebalance": """A mod designed to rebalance the game in some way
+                    (eg: Safe autodocs).""",
+    "magical": """A mod that adds something magic-related to the game
+                    (eg: Necromancy)""",
+    "item_exclude": """A mod that stops items from spawning in the world
+                    (eg: No survivor armor, No drugs)""",
+    "monster_exclude": """A mod that stops certain monster varieties from spawning in the world
+                    (eg: No fungal monsters, No ants)""",
+    "graphical": """A mod that adjusts game graphics in some way
+                    (eg: Graphical overmap)""",
+}
+for key, value in categories.items():
+    globals()[to_classname(key)] = enumModel(key, value)
 
-
-class Items(BaseModel):
-    __root__: Literal["items"] = field(
-        """A mod that adds new items and recipes to the game
-        (eg: More survival tools)""",
-    )
-
-
-class Creatures(BaseModel):
-    __root__: Literal["creatures"] = field(
-        """A mod that adds new creatures or NPCs to the game
-        (eg: Modular turrets)""",
-    )
-
-
-class MiscAdditions(BaseModel):
-    __root__: Literal["misc_additions"] = field(
-        """Miscellaneous content additions to the game
-        (eg: Alternative map key, Crazy cataclysm)""",
-    )
-
-
-class Buildings(BaseModel):
-    __root__: Literal["buildings"] = field(
-        """New overmap locations and structures
-        (eg: Fuji's more buildings).
-        If you're blacklisting buildings from spawning,
-        this is also a usable category
-        (eg: No rail stations).""",
-    )
-
-
-class Vehicles(BaseModel):
-    __root__: Literal["vehicles"] = field(
-        """New cars or vehicle parts
-        (eg: Tanks and  vehicles)""",
-    )
-
-
-class Rebalance(BaseModel):
-    __root__: Literal["rebalance"] = field(
-        """A mod designed to rebalance the game in some way
-         (eg: Safe autodocs).""",
-    )
-
-
-class Magical(BaseModel):
-    __root__: Literal["magical"] = field(
-        """A mod that adds something magic-related to the game
-        (eg: Necromancy)""",
-    )
-
-
-class ItemExclude(BaseModel):
-    __root__: Literal["item_exclude"] = field(
-        """A mod that stops items from spawning in the world
-         (eg: No survivor armor, No drugs)""",
-    )
-
-
-class MonsterExclude(BaseModel):
-    __root__: Literal["monster_exclude"] = field(
-        """A mod that stops certain monster varieties from spawning in the world
-        (eg: No fungal monsters, No ants)""",
-    )
-
-
-class Graphical(BaseModel):
-    __root__: Literal["graphical"] = field(
-        """A mod that adjusts game graphics in some way
-         (eg: Graphical overmap)""",
-    )
-
+pprint(globals())
 
 Category = (
     Content
