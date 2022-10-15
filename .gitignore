@@ -1,6 +1,5 @@
 out
 dist
-data
 example
 node_modules
 .vscode-test/
