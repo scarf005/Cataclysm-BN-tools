@@ -19,6 +19,12 @@
         "command": "cataclysm-bright-nights-tools.helloWorld",
         "title": "Hello World"
       }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": "**/modinfo.json",
+        "url": "./data/modinfo.json"
+      }
     ]
   },
   "scripts": {
