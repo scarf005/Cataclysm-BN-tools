@@ -1,10 +1,24 @@
-.vscode/**
-.vscode-test/**
-src/**
-.gitignore
-.yarnrc
-vsc-extension-quickstart.md
-**/tsconfig.json
-**/.eslintrc.json
-**/*.map
-**/*.ts
+# Use Whitelist
+*
+*/**
+**./DS_Store
+
+# Allow
+# https://github.com/Microsoft/vscode-mono-debug/blob/main/.vscodeignore
+!.vscodeignore
+!bin/Release/*
+!out/extension.js
+!node_modules/vscode-nls/**/*
+!node_modules/vscode-debugprotocol/**/*
+!package.json
+!package.nls.json
+!README.md
+!CHANGELOG.md
+!LICENSE.txt
+!ThirdPartyNotices.txt
+!images/*
+
+# Schemas
+!data/**/*
+
+# !src/*

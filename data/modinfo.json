@@ -1,0 +1,276 @@
+{
+  "title": "ModInfoFile",
+  "anyOf": [
+    {
+      "$ref": "#/definitions/ModInfo"
+    },
+    {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ModInfo"
+      }
+    }
+  ],
+  "definitions": {
+    "Content": {
+      "title": "Content",
+      "description": "A mod that adds a lot of stuff. Typically reserved for very large mods or complete game overhauls (eg: Core game files, Aftershock)",
+      "markdownDescription": "A mod that adds a lot of stuff. Typically reserved for very large mods or complete game overhauls (eg: Core game files, Aftershock)",
+      "enum": [
+        "content"
+      ],
+      "type": "string"
+    },
+    "Items": {
+      "title": "Items",
+      "description": "A mod that adds new items and recipes to the game (eg: More survival tools)",
+      "markdownDescription": "A mod that adds new items and recipes to the game (eg: More survival tools)",
+      "enum": [
+        "items"
+      ],
+      "type": "string"
+    },
+    "Creatures": {
+      "title": "Creatures",
+      "description": "A mod that adds new creatures or NPCs to the game (eg: Modular turrets)",
+      "markdownDescription": "A mod that adds new creatures or NPCs to the game (eg: Modular turrets)",
+      "enum": [
+        "creatures"
+      ],
+      "type": "string"
+    },
+    "MiscAdditions": {
+      "title": "MiscAdditions",
+      "description": "Miscellaneous content additions to the game (eg: Alternative map key, Crazy cataclysm)",
+      "markdownDescription": "Miscellaneous content additions to the game (eg: Alternative map key, Crazy cataclysm)",
+      "enum": [
+        "misc_additions"
+      ],
+      "type": "string"
+    },
+    "Buildings": {
+      "title": "Buildings",
+      "description": "New overmap locations and structures (eg: Fuji's more buildings). If you're blacklisting buildings from spawning, this is also a usable category (eg: No rail stations).",
+      "markdownDescription": "New overmap locations and structures (eg: Fuji's more buildings). If you're blacklisting buildings from spawning, this is also a usable category (eg: No rail stations).",
+      "enum": [
+        "buildings"
+      ],
+      "type": "string"
+    },
+    "Vehicles": {
+      "title": "Vehicles",
+      "description": "New cars or vehicle parts (eg: Tanks and vehicles)",
+      "markdownDescription": "New cars or vehicle parts (eg: Tanks and vehicles)",
+      "enum": [
+        "vehicles"
+      ],
+      "type": "string"
+    },
+    "Rebalance": {
+      "title": "Rebalance",
+      "description": "A mod designed to rebalance the game in some way (eg: Safe autodocs).",
+      "markdownDescription": "A mod designed to rebalance the game in some way (eg: Safe autodocs).",
+      "enum": [
+        "rebalance"
+      ],
+      "type": "string"
+    },
+    "Magical": {
+      "title": "Magical",
+      "description": "A mod that adds something magic-related to the game (eg: Necromancy)",
+      "markdownDescription": "A mod that adds something magic-related to the game (eg: Necromancy)",
+      "enum": [
+        "magical"
+      ],
+      "type": "string"
+    },
+    "ItemExclude": {
+      "title": "ItemExclude",
+      "description": "A mod that stops items from spawning in the world (eg: No survivor armor, No drugs)",
+      "markdownDescription": "A mod that stops items from spawning in the world (eg: No survivor armor, No drugs)",
+      "enum": [
+        "item_exclude"
+      ],
+      "type": "string"
+    },
+    "MonsterExclude": {
+      "title": "MonsterExclude",
+      "description": "A mod that stops certain monster varieties from spawning in the world (eg: No fungal monsters, No ants)",
+      "markdownDescription": "A mod that stops certain monster varieties from spawning in the world (eg: No fungal monsters, No ants)",
+      "enum": [
+        "monster_exclude"
+      ],
+      "type": "string"
+    },
+    "Graphical": {
+      "title": "Graphical",
+      "description": "A mod that adjusts game graphics in some way (eg: Graphical overmap)",
+      "markdownDescription": "A mod that adjusts game graphics in some way (eg: Graphical overmap)",
+      "enum": [
+        "graphical"
+      ],
+      "type": "string"
+    },
+    "ModInfo": {
+      "title": "ModInfo",
+      "description": "data format for modinfo.json\n\nsee https://github.com/cataclysmbnteam/Cataclysm-BN/blob/upload/doc/JSON_INFO.md#mod_info",
+      "type": "object",
+      "properties": {
+        "type": {
+          "title": "Type",
+          "description": "This field marks this object as modinfo.",
+          "default": "MOD_INFO",
+          "const": "MOD_INFO",
+          "markdownDescription": "This field marks this object as modinfo.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "description": "Mod's unique identifier, prefer to use only ASCII letters, numbers and underscore for clarity.",
+          "markdownDescription": "Mod's unique identifier, prefer to use only ASCII letters, numbers and underscore for clarity.",
+          "required": true,
+          "pattern": "^[a-zA-Z0-9_]+$",
+          "type": "string"
+        },
+        "category": {
+          "title": "Category",
+          "description": "The `category` attribute denotes where the mod will appear in the mod selection menu. These are the available categories to choose from, with some examples chosen from mods that existed when this document was written. Pick whichever one applies best to your mod when writing your modinfo file.",
+          "markdownDescription": "The `category` attribute denotes where the mod will appear in the mod selection menu. These are the available categories to choose from, with some examples chosen from mods that existed when this document was written. Pick whichever one applies best to your mod when writing your modinfo file.",
+          "required": true,
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Content"
+            },
+            {
+              "$ref": "#/definitions/Items"
+            },
+            {
+              "$ref": "#/definitions/Creatures"
+            },
+            {
+              "$ref": "#/definitions/MiscAdditions"
+            },
+            {
+              "$ref": "#/definitions/Buildings"
+            },
+            {
+              "$ref": "#/definitions/Vehicles"
+            },
+            {
+              "$ref": "#/definitions/Rebalance"
+            },
+            {
+              "$ref": "#/definitions/Magical"
+            },
+            {
+              "$ref": "#/definitions/ItemExclude"
+            },
+            {
+              "$ref": "#/definitions/MonsterExclude"
+            },
+            {
+              "$ref": "#/definitions/Graphical"
+            }
+          ]
+        },
+        "name": {
+          "title": "Name",
+          "description": "Mod's display name, in `English`.",
+          "markdownDescription": "Mod's display name, in `English`.",
+          "required": true,
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "description": "Mod's description, in `English`.",
+          "markdownDescription": "Mod's description, in `English`.",
+          "required": true,
+          "minLength": 1,
+          "type": "string"
+        },
+        "authors": {
+          "title": "Authors",
+          "description": "Original author(s) of the mod.",
+          "markdownDescription": "Original author(s) of the mod.",
+          "required": true,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "maintainers": {
+          "title": "Maintainers",
+          "description": "If the author(s) abandoned the mod for some reason, this entry lists current maintainers.",
+          "markdownDescription": "If the author(s) abandoned the mod for some reason, this entry lists current maintainers.",
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "version": {
+          "title": "Version",
+          "description": "Mod version string. This is for users' and maintainers' convenience, so you can use whatever is most convenient here (e.g. `2021-12-02`).",
+          "markdownDescription": "Mod version string. This is for users' and maintainers' convenience, so you can use whatever is most convenient here (e.g. `2021-12-02`).",
+          "minLength": 1,
+          "type": "string"
+        },
+        "dependencies": {
+          "title": "Dependencies",
+          "description": "The `dependencies` attribute is used to tell Cataclysm that your mod is dependent on something present in another mod. If you have no dependencies outside of the core game, then just including `dda` in the list is good enough. If your mod depends on another one to work properly, adding that mod's `id` attribute to the array causes Cataclysm to force that mod to load before yours.",
+          "markdownDescription": "The `dependencies` attribute is used to tell Cataclysm that your mod is dependent on something present in another mod. If you have no dependencies outside of the core game, then just including `dda` in the list is good enough. If your mod depends on another one to work properly, adding that mod's `id` attribute to the array causes Cataclysm to force that mod to load before yours.",
+          "required": true,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "conflicts": {
+          "title": "Conflicts",
+          "description": "List of mods that are incompatible with this mod.",
+          "markdownDescription": "List of mods that are incompatible with this mod.",
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "core": {
+          "title": "Core",
+          "description": "Special flag for core game data, can only be used by total overhaul mods. Only 1 core mod can be loaded at a time.",
+          "markdownDescription": "Special flag for core game data, can only be used by total overhaul mods. Only 1 core mod can be loaded at a time.",
+          "type": "boolean"
+        },
+        "obsolete": {
+          "title": "Obsolete",
+          "description": "Marks mod as obsolete. Obsolete mods don't show up in mod selection list by default, and have a warning on them.",
+          "markdownDescription": "Marks mod as obsolete. Obsolete mods don't show up in mod selection list by default, and have a warning on them.",
+          "type": "boolean"
+        },
+        "path": {
+          "title": "Path",
+          "description": "Path of mod's files relative to the modinfo.json file. The game automatically loads all files from the folder with modinfo.json, and all the subfolders, so this field is only useful when you for whatever reason want to stick your modinfo.json in a subfolder of your mod.",
+          "markdownDescription": "Path of mod's files relative to the modinfo.json file. The game automatically loads all files from the folder with modinfo.json, and all the subfolders, so this field is only useful when you for whatever reason want to stick your modinfo.json in a subfolder of your mod.",
+          "type": "string",
+          "format": "path"
+        }
+      },
+      "required": [
+        "id",
+        "category",
+        "name",
+        "description",
+        "authors",
+        "dependencies"
+      ]
+    }
+  }
+}
