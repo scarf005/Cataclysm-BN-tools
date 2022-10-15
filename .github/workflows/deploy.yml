@@ -28,7 +28,7 @@ jobs:
 
       - name: Release
         run: |
-          echo token: $VSCE_PAT
+          vsce verify-pat scarf --pat $VSCE_PAT
           pnpx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
