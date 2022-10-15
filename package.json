@@ -34,8 +34,8 @@
   "scripts": {
     "vscode:prepublish": "pnpm run esbuild-base --minify",
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
-    "package": "pnpm vsce package --no-dependencies",
-    "publish": "pnpm vsce publish --no-dependencies",
+    "package": "pnpm vsce package",
+    "publish": "pnpm vsce publish",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "pnpm run compile && pnpm run lint",
@@ -68,5 +68,8 @@
     "type": "git",
     "url": "https://github.com/scarf005/Cataclysm-BN-tools"
   },
-  "homepage": "https://github.com/scarf005/Cataclysm-BN-tools"
+  "homepage": "https://github.com/scarf005/Cataclysm-BN-tools",
+  "vsce": {
+    "dependencies": false
+  }
 }
