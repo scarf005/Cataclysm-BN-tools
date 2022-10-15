@@ -29,7 +29,8 @@ jobs:
       - name: Release
         run: |
           pnpx vsce verify-pat scarf --pat $VSCE_PAT
-          pnpx semantic-release
+          echo path is: "${PWD}/node_modules/.bin:${PATH}"
+          PATH="${PWD}/node_modules/.bin:${PATH}" pnpx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VSCE_PAT: ${{ secrets.VSCE_TOKEN }}
