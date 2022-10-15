@@ -19,23 +19,39 @@ def fold_text(text: str) -> str:
     return re.sub(r"\s+", " ", text)
 
 
-def field(default: Any = Undefined, desc: str = None, fold=True, **kwargs):  # type: ignore
-    print(f'{default = }')
-    if not desc:
-        return Field(default, **kwargs)
-    else:
-        description = (fold_text if fold else dedent)(desc)
-        return Field(
-            default,
-            description=description,
-            markdownDescription=description,
-            **kwargs,
-        )
+def field(*args: str, fold=True, **kwargs):  # type: ignore
+    """one args: description, two args: default, description"""
+
+    match len(args):
+        case 1:
+            default, description = ..., args[0]
+        case 2:
+            default, description = args # type: ignore
+
+        case _:
+            raise ValueError(
+                f"field() takes 1 or 2 positional arguments, but got {args}"
+            )
+
+    desc = (fold_text if fold else dedent)(description) # type: ignore
+    return Field(
+        default,
+        description=desc,
+        markdownDescription=desc,
+        **kwargs,
+    )
+
+
+f = field(
+    """A mod that adds a lot of stuff.
+        Typically reserved for very large mods or
+        complete game overhauls
+        (eg: Core game files, Aftershock)""",
+)
 
 
 class Content(BaseModel):
     __root__: Literal["content"] = field(
-        ...,
         """A mod that adds a lot of stuff.
         Typically reserved for very large mods or
         complete game overhauls
@@ -43,9 +59,13 @@ class Content(BaseModel):
     )
 
 
+# Content = create_model(
+# "Content", __root__=(Literal["content"], f), __base__=BaseModel
+# )
+
+
 class Items(BaseModel):
     __root__: Literal["items"] = field(
-        ...,
         """A mod that adds new items and recipes to the game
         (eg: More survival tools)""",
     )
@@ -53,7 +73,6 @@ class Items(BaseModel):
 
 class Creatures(BaseModel):
     __root__: Literal["creatures"] = field(
-        ...,
         """A mod that adds new creatures or NPCs to the game
         (eg: Modular turrets)""",
     )
@@ -61,7 +80,6 @@ class Creatures(BaseModel):
 
 class MiscAdditions(BaseModel):
     __root__: Literal["misc_additions"] = field(
-        ...,
         """Miscellaneous content additions to the game
         (eg: Alternative map key, Crazy cataclysm)""",
     )
@@ -69,7 +87,6 @@ class MiscAdditions(BaseModel):
 
 class Buildings(BaseModel):
     __root__: Literal["buildings"] = field(
-        ...,
         """New overmap locations and structures
         (eg: Fuji's more buildings).
         If you're blacklisting buildings from spawning,
@@ -80,15 +97,13 @@ class Buildings(BaseModel):
 
 class Vehicles(BaseModel):
     __root__: Literal["vehicles"] = field(
-        ...,
         """New cars or vehicle parts
-        (eg: Tanks and othem vehicles)""",
+        (eg: Tanks and  vehicles)""",
     )
 
 
 class Rebalance(BaseModel):
     __root__: Literal["rebalance"] = field(
-        ...,
         """A mod designed to rebalance the game in some way
          (eg: Safe autodocs).""",
     )
@@ -96,7 +111,6 @@ class Rebalance(BaseModel):
 
 class Magical(BaseModel):
     __root__: Literal["magical"] = field(
-        ...,
         """A mod that adds something magic-related to the game
         (eg: Necromancy)""",
     )
@@ -104,7 +118,6 @@ class Magical(BaseModel):
 
 class ItemExclude(BaseModel):
     __root__: Literal["item_exclude"] = field(
-        ...,
         """A mod that stops items from spawning in the world
          (eg: No survivor armor, No drugs)""",
     )
@@ -112,7 +125,6 @@ class ItemExclude(BaseModel):
 
 class MonsterExclude(BaseModel):
     __root__: Literal["monster_exclude"] = field(
-        ...,
         """A mod that stops certain monster varieties from spawning in the world
         (eg: No fungal monsters, No ants)""",
     )
@@ -120,7 +132,6 @@ class MonsterExclude(BaseModel):
 
 class Graphical(BaseModel):
     __root__: Literal["graphical"] = field(
-        ...,
         """A mod that adjusts game graphics in some way
          (eg: Graphical overmap)""",
     )
@@ -142,17 +153,17 @@ Category = (
 
 
 class ModInfo(BaseModel):
-    type_: String = field("MOD_INFO", alias="type", const=True)
-    id_: ID = field(
-        ...,
-        alias="id",
-        desc="""Mod's unique identifier, prefer to use only ASCII letters, numbers and underscore for clarity.""",
+    type_: String = field(
+        "MOD_INFO", "Identifier for ModInfo object.", alias="type", const=True
     )
-    name: String = field(..., "Mod's display name, in `English`.")
-    authors: List[String] = field(..., "Original author(s) of the mod.")
-    description: String = field(..., "Mod's description, in `English`.")
+    id_: ID = field(
+        """Mod's unique identifier, prefer to use only ASCII letters, numbers and underscore for clarity.""",
+        alias="id",
+    )
+    name: String = field("Mod's display name, in `English`.")
+    authors: List[String] = field("Original author(s) of the mod.")
+    description: String = field("Mod's description, in `English`.")
     category: Category = field(
-        ...,
         """The `category` attribute denotes
         where the mod will appear in the mod selection menu.
         These are the available categories to choose from,
@@ -162,7 +173,6 @@ class ModInfo(BaseModel):
         when writing your modinfo file.""",
     )
     dependencies: List[String] = field(
-        ...,
         """The `dependencies` attribute is used to tell Cataclysm
         that your mod is dependent on something present in another mod.
         If you have no dependencies outside of the core game,
@@ -179,8 +189,7 @@ class ModInfoFile(BaseModel):
 
 if __name__ == "__main__":
     schema = ModInfoFile.schema()
-    # sea
 
-    # from pathlib import Path
+    from pathlib import Path
 
-    # Path("data/modinfo.json").write_text(ModInfoFile.schema_json(indent=2))
+    Path("data/modinfo.json").write_text(ModInfoFile.schema_json(indent=2))
