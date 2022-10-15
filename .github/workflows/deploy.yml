@@ -28,7 +28,7 @@ jobs:
 
       - name: Release
         run: |
-          echo token: ${{ secrets.VSCE_TOKEN }}
+          echo token: $VSCE_PAT
           pnpx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
