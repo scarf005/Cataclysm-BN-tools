@@ -27,7 +27,9 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Release
-        run: pnpx semantic-release
+        run: |
+          echo token: ${{ secrets.VSCE_TOKEN }}
+          pnpx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VSCE_PAT: ${{ secrets.VSCE_TOKEN }}
