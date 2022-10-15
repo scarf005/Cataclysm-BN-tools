@@ -1,5 +1,5 @@
 {
-  "name": "cataclysm-bright-nights-tools",
+  "name": "cataclysm-bn-tools",
   "displayName": "Cataclysm: Bright Nights tools",
   "description": "This extension adds support for Cataclysm: Bright Nights JSON data validation.",
   "version": "0.0.1",
@@ -7,19 +7,14 @@
     "vscode": "^1.72.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages",
+    "Linters"
   ],
   "activationEvents": [
-    "onCommand:cataclysm-bright-nights-tools.helloWorld"
+    "onCommand:cataclysm-bn-tools.helloWorld"
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "cataclysm-bright-nights-tools.helloWorld",
-        "title": "Hello World"
-      }
-    ],
     "jsonValidation": [
       {
         "fileMatch": "**/modinfo.json",
@@ -33,7 +28,8 @@
     "watch": "tsc -watch -p ./",
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "schema": "python3 ./gen_schema.py"
   },
   "devDependencies": {
     "@types/vscode": "^1.72.0",
