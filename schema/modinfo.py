@@ -1,6 +1,8 @@
+from pathlib import Path
+
 from pydantic import BaseModel
 
-from schema.utils import ID, JList, JStr, enums_from, field
+from schema.utils import ID, JList, JStr, enums_from, field, optfield
 
 Category = enums_from(
     {
@@ -36,17 +38,23 @@ Category = enums_from(
 
 
 class ModInfo(BaseModel):
-    type_: JStr = field(
-        "MOD_INFO", "Identifier for ModInfo object.", alias="type", const=True
+    """data format for modinfo.json
+
+    see https://github.com/cataclysmbnteam/Cataclysm-BN/blob/upload/doc/JSON_INFO.md#mod_info
+    """
+
+    type_: JStr = optfield(
+        "MOD_INFO",
+        "This field marks this object as modinfo.",
+        alias="type",
+        const=True,
     )
+
     id_: ID = field(
         """Mod's unique identifier, prefer to use only ASCII letters,
         numbers and underscore for clarity.""",
         alias="id",
     )
-    name: JStr = field("Mod's display name, in `English`.")
-    authors: JList[JStr] = field("Original author(s) of the mod.")
-    description: JStr = field("Mod's description, in `English`.")
     category: Category = field(  # type: ignore
         """The `category` attribute denotes
         where the mod will appear in the mod selection menu.
@@ -56,6 +64,19 @@ class ModInfo(BaseModel):
         Pick whichever one applies best to your mod
         when writing your modinfo file.""",
     )
+    name: JStr = field("Mod's display name, in `English`.")
+    description: JStr = field("Mod's description, in `English`.")
+    authors: JList[JStr] = field("Original author(s) of the mod.")
+    maintainers: JList[JStr] | None = optfield(
+        """If the author(s) abandoned the mod for some reason,
+        this entry lists current maintainers."""
+    )
+    version: JStr | None = optfield(
+        """Mod version string.
+        This is for users' and maintainers' convenience,
+        so you can use whatever is most convenient here
+        (e.g. `2021-12-02`)."""
+    )
     dependencies: JList[JStr] = field(
         """The `dependencies` attribute is used to tell Cataclysm
         that your mod is dependent on something present in another mod.
@@ -64,6 +85,26 @@ class ModInfo(BaseModel):
         If your mod depends on another one to work properly,
         adding that mod's `id` attribute to the array causes
         Cataclysm to force that mod to load before yours.""",
+    )
+    conflicts: JList[JStr] | None = optfield(
+        "List of mods that are incompatible with this mod."
+    )
+    core: bool | None = optfield(
+        """Special flag for core game data,
+        can only be used by total overhaul mods.
+        Only 1 core mod can be loaded at a time.""",
+    )
+    obsolete: bool | None = optfield(
+        """Marks mod as obsolete.
+        Obsolete mods don't show up in mod selection list by default,
+        and have a warning on them.""",
+    )
+    path: Path | None = optfield(
+        """Path of mod's files relative to the modinfo.json file.
+        The game automatically loads all files from the folder with modinfo.json,
+        and all the subfolders, so this field is only useful
+        when you for whatever reason want to stick your modinfo.json
+        in a subfolder of your mod.""",
     )
 
 
