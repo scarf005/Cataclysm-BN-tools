@@ -41,8 +41,7 @@ jobs:
 
       - name: Release
         run: |
-          echo path is: "${PWD}/node_modules/.bin:${PATH}"
-          PATH="${PWD}/node_modules/.bin:${PATH}" pnpm run semantic-release
+          pnpm run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VSCE_PAT: ${{ secrets.VSCE_TOKEN }}
