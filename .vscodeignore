@@ -3,22 +3,24 @@
 */**
 **./DS_Store
 
-# Allow
 # https://github.com/Microsoft/vscode-mono-debug/blob/main/.vscodeignore
+
+# Compiled Extension
+!out/main.js
+!out/**/*
+
+# Schemas
+!data/**/*
+
+# Others
 !.vscodeignore
-!bin/Release/*
-!out/extension.js
 !node_modules/vscode-nls/**/*
 !node_modules/vscode-debugprotocol/**/*
 !package.json
 !package.nls.json
+
 !README.md
 !CHANGELOG.md
 !LICENSE.txt
 !ThirdPartyNotices.txt
 !images/*
-
-# Schemas
-!data/**/*
-
-# !src/*
