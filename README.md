@@ -1,6 +1,6 @@
 # Cataclysm: Bright Nights Tools
 
-![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/cataclysm-bn-tools?label=Visual%20Studio%20Marketplace&logo=Visual%20Studio%20Code&style=flat-square)
+![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/scarf.cataclysm-bn-tools?label=Visual%20Studio%20Marketplace&logo=Visual%20Studio%20Code&style=flat-square)
 
 This extension adds JSON validation support for Cataclysm: Bright Nights development.
 

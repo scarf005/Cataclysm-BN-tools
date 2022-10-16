@@ -1,7 +1,7 @@
 {
   "name": "cataclysm-bn-tools",
   "displayName": "Cataclysm: Bright Nights tools",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "publisher": "scarf",
   "description": "This extension adds support for Cataclysm: Bright Nights JSON data validation.",
   "author": {
@@ -46,6 +46,8 @@
     "deploy": "vsce "
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.0",
     "@types/node": "16.x",
@@ -74,5 +76,6 @@
   "homepage": "https://github.com/scarf005/Cataclysm-BN-tools",
   "vsce": {
     "dependencies": false
-  }
+  },
+  "private": true
 }
