@@ -107,6 +107,3 @@ class ModInfo(BaseModel):
         in a subfolder of your mod.""",
     )
 
-
-class ModInfoFile(BaseModel):
-    __root__: ModInfo | list[ModInfo]
