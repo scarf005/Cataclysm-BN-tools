@@ -1,3 +1,12 @@
+# Changelog
+
+## [1.0.1](https://github.com/scarf005/Cataclysm-BN-tools/compare/v1.0.0...v1.0.1) (2022-10-16)
+
+
+### Bug Fixes
+
+* try without PATH ([072315e](https://github.com/scarf005/Cataclysm-BN-tools/commit/072315eaeea07c10ec5e82b30dd5b52b8b4567a1))
+
 # Change Log
 
 All notable changes to the "cataclysm-bn-tools" extension will be documented in this file.
