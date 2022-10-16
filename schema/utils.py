@@ -27,7 +27,7 @@ def get_desc(text: str, fold: bool = True):
     return (fold_text if fold else dedent)(text)
 
 
-def optfield(*args: Any, fold: bool = True, **kwargs: Any):
+def field(*args: Any, fold: bool = True, **kwargs: Any):
     """one args: description, two args: default, description"""
 
     desc = get_desc(args[-1], fold=fold)
@@ -40,8 +40,8 @@ def optfield(*args: Any, fold: bool = True, **kwargs: Any):
     match args:
         case [str()]:
             ...
-        case [_, str()]:
-            args_dict["default"] = args[0]
+        case [_ as default, str()]:
+            args_dict["default"] = default
         case _:
             raise ValueError(
                 f"field() takes 1 or 2 positional arguments, but got {args}"
@@ -50,8 +50,8 @@ def optfield(*args: Any, fold: bool = True, **kwargs: Any):
     return Field(**(args_dict | kwargs))
 
 
-def field(desc: str, fold: bool = True, **kwargs: Any):
-    return optfield(..., desc, fold=fold, **kwargs, required=True)
+def reqfield(desc: str, fold: bool = True, **kwargs: Any):
+    return field(..., desc, fold=fold, **kwargs, required=True)
 
 
 def enum_model(
@@ -61,7 +61,7 @@ def enum_model(
 
     return create_model(
         to_classname(name),
-        __root__=(Literal[name], optfield(*args, fold=fold, **kwargs)),  # type: ignore
+        __root__=(Literal[name], field(*args, fold=fold, **kwargs)),  # type: ignore
         __base__=BaseModel,
     )
 

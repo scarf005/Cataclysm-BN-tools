@@ -2,7 +2,7 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
-from schema.utils import ID, JList, JStr, enums_from, field, optfield
+from schema.utils import ID, JList, JStr, enums_from, field, reqfield
 
 Category = enums_from(
     {
@@ -22,7 +22,7 @@ Category = enums_from(
                     this is also a usable category
                     (eg: No rail stations).""",
         "vehicles": """New cars or vehicle parts
-                   (eg: Tanks and  vehicles)""",
+                   (eg: Tanks and vehicles)""",
         "rebalance": """A mod designed to rebalance the game in some way
                     (eg: Safe autodocs).""",
         "magical": """A mod that adds something magic-related to the game
@@ -43,19 +43,19 @@ class ModInfo(BaseModel):
     see https://github.com/cataclysmbnteam/Cataclysm-BN/blob/upload/doc/JSON_INFO.md#mod_info
     """
 
-    type_: JStr = optfield(
+    type_: JStr = field(
         "MOD_INFO",
         "This field marks this object as modinfo.",
         alias="type",
         const=True,
     )
 
-    id_: ID = field(
+    id_: ID = reqfield(
         """Mod's unique identifier, prefer to use only ASCII letters,
         numbers and underscore for clarity.""",
         alias="id",
     )
-    category: Category = field(  # type: ignore
+    category: Category = reqfield(  # type: ignore
         """The `category` attribute denotes
         where the mod will appear in the mod selection menu.
         These are the available categories to choose from,
@@ -64,20 +64,20 @@ class ModInfo(BaseModel):
         Pick whichever one applies best to your mod
         when writing your modinfo file.""",
     )
-    name: JStr = field("Mod's display name, in `English`.")
-    description: JStr = field("Mod's description, in `English`.")
-    authors: JList[JStr] = field("Original author(s) of the mod.")
-    maintainers: JList[JStr] | None = optfield(
+    name: JStr = reqfield("Mod's display name, in `English`.")
+    description: JStr = reqfield("Mod's description, in `English`.")
+    authors: JList[JStr] = reqfield("Original author(s) of the mod.")
+    maintainers: JList[JStr] | None = field(
         """If the author(s) abandoned the mod for some reason,
         this entry lists current maintainers."""
     )
-    version: JStr | None = optfield(
+    version: JStr | None = field(
         """Mod version string.
         This is for users' and maintainers' convenience,
         so you can use whatever is most convenient here
         (e.g. `2021-12-02`)."""
     )
-    dependencies: JList[JStr] = field(
+    dependencies: JList[JStr] = reqfield(
         """The `dependencies` attribute is used to tell Cataclysm
         that your mod is dependent on something present in another mod.
         If you have no dependencies outside of the core game,
@@ -86,20 +86,20 @@ class ModInfo(BaseModel):
         adding that mod's `id` attribute to the array causes
         Cataclysm to force that mod to load before yours.""",
     )
-    conflicts: JList[JStr] | None = optfield(
+    conflicts: JList[JStr] | None = field(
         "List of mods that are incompatible with this mod."
     )
-    core: bool | None = optfield(
+    core: bool | None = field(
         """Special flag for core game data,
         can only be used by total overhaul mods.
         Only 1 core mod can be loaded at a time.""",
     )
-    obsolete: bool | None = optfield(
+    obsolete: bool | None = field(
         """Marks mod as obsolete.
         Obsolete mods don't show up in mod selection list by default,
         and have a warning on them.""",
     )
-    path: Path | None = optfield(
+    path: Path | None = field(
         """Path of mod's files relative to the modinfo.json file.
         The game automatically loads all files from the folder with modinfo.json,
         and all the subfolders, so this field is only useful
