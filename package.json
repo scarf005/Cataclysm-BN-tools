@@ -16,6 +16,10 @@
       {
         "fileMatch": "**/modinfo.json",
         "url": "./data/modinfo.json"
+      },
+      {
+        "fileMatch": "!dda/**/*.json",
+        "url": "./data/tileinfo.json"
       }
     ]
   },

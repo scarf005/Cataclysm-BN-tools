@@ -13,22 +13,13 @@
           "pattern": "^[a-zA-Z0-9_]+$"
         },
         {
-          "$ref": "#/definitions/PlayerFemale"
-        },
-        {
-          "$ref": "#/definitions/PlayerMale"
-        },
-        {
-          "$ref": "#/definitions/NpcFemale"
-        },
-        {
-          "$ref": "#/definitions/NpcMale"
+          "$ref": "#/definitions/Npcs"
         },
         {
           "$ref": "#/definitions/Unknown"
         },
         {
-          "$ref": "#/definitions/MySeasonSpring"
+          "$ref": "#/definitions/Season"
         }
       ]
     },
@@ -62,63 +53,56 @@
     "bg"
   ],
   "definitions": {
-    "PlayerFemale": {
-      "title": "PlayerFemale",
-      "description": " The special ids `\"player_female\"`, `\"player_male\"`, `\"npc_female\"`, `\"npc_male\"` are used to identify the sprites for the player avatar and NPCs.",
-      "markdownDescription": " The special ids `\"player_female\"`, `\"player_male\"`, `\"npc_female\"`, `\"npc_male\"` are used to identify the sprites for the player avatar and NPCs.",
-      "enum": [
-        "player_female"
-      ],
-      "type": "string"
-    },
-    "PlayerMale": {
-      "title": "PlayerMale",
-      "description": " The special ids `\"player_female\"`, `\"player_male\"`, `\"npc_female\"`, `\"npc_male\"` are used to identify the sprites for the player avatar and NPCs.",
-      "markdownDescription": " The special ids `\"player_female\"`, `\"player_male\"`, `\"npc_female\"`, `\"npc_male\"` are used to identify the sprites for the player avatar and NPCs.",
-      "enum": [
-        "player_male"
-      ],
-      "type": "string"
-    },
-    "NpcFemale": {
-      "title": "NpcFemale",
-      "description": " The special ids `\"player_female\"`, `\"player_male\"`, `\"npc_female\"`, `\"npc_male\"` are used to identify the sprites for the player avatar and NPCs.",
-      "markdownDescription": " The special ids `\"player_female\"`, `\"player_male\"`, `\"npc_female\"`, `\"npc_male\"` are used to identify the sprites for the player avatar and NPCs.",
-      "enum": [
-        "npc_female"
-      ],
-      "type": "string"
-    },
-    "NpcMale": {
-      "title": "NpcMale",
-      "description": " The special ids `\"player_female\"`, `\"player_male\"`, `\"npc_female\"`, `\"npc_male\"` are used to identify the sprites for the player avatar and NPCs.",
-      "markdownDescription": " The special ids `\"player_female\"`, `\"player_male\"`, `\"npc_female\"`, `\"npc_male\"` are used to identify the sprites for the player avatar and NPCs.",
-      "enum": [
-        "npc_male"
-      ],
-      "type": "string"
-    },
-    "Unknown": {
-      "title": "Unknown",
-      "description": "The special id `\"unknown\"` provides a sprite that is displayed when an entity has no other sprite.",
-      "markdownDescription": "The special id `\"unknown\"` provides a sprite that is displayed when an entity has no other sprite.",
-      "enum": [
-        "unknown"
-      ],
-      "type": "string"
-    },
-    "MySeasonSpring": {
-      "title": "MySeasonSpring",
-      "description": "The special suffixes `_season_spring`, `_season_summer`, `_season_autumn`, and `_season_winter` can be applied to any entity id to create a seasonal variant for that entity that will be displayed in the appropriate season like this `\"id\": \"mon_wolf_season_winter\".`",
-      "markdownDescription": "The special suffixes `_season_spring`, `_season_summer`, `_season_autumn`, and `_season_winter` can be applied to any entity id to create a seasonal variant for that entity that will be displayed in the appropriate season like this `\"id\": \"mon_wolf_season_winter\".`",
+    "Npcs": {
+      "title": "Npcs",
+      "description": "The special ids `player_female`, `player_male`, `npc_female`, `npc_male` are used to identify the sprites for the **player avatar** and **NPC**s.",
+      "markdownDescription": "The special ids `player_female`, `player_male`, `npc_female`, `npc_male` are used to identify the sprites for the **player avatar** and **NPC**s.",
       "anyOf": [
         {
           "type": "string",
-          "pattern": "^[a-zA-Z0-9_]+_season_spring$"
+          "pattern": "^player_female$"
         },
         {
           "type": "string",
-          "pattern": "^[a-zA-Z0-9_]+_season_winter$"
+          "pattern": "^player_male$"
+        },
+        {
+          "type": "string",
+          "pattern": "^npc_female$"
+        },
+        {
+          "type": "string",
+          "pattern": "^npc_male$"
+        }
+      ]
+    },
+    "Unknown": {
+      "title": "Unknown",
+      "description": "The special id `unknown` provides a sprite that is displayed when an entity has no other sprite.",
+      "markdownDescription": "The special id `unknown` provides a sprite that is displayed when an entity has no other sprite.",
+      "pattern": "^unknown$",
+      "type": "string"
+    },
+    "Season": {
+      "title": "Season",
+      "description": "The special suffixes `spring`, `summer`, `winter`, `fall` can be applied to any entity id to create a **seasonal variant** for that entity that will be displayed in the appropriate season like this:\n\n    \"id\": \"mon_wolf_season_winter\".\n",
+      "markdownDescription": "The special suffixes `spring`, `summer`, `winter`, `fall` can be applied to any entity id to create a **seasonal variant** for that entity that will be displayed in the appropriate season like this:\n\n    \"id\": \"mon_wolf_season_winter\".\n",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_]+_spring$"
+        },
+        {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_]+_summer$"
+        },
+        {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_]+_winter$"
+        },
+        {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_]+_fall$"
         }
       ]
     }
