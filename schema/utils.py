@@ -2,7 +2,14 @@ import re
 from textwrap import dedent
 from typing import TYPE_CHECKING, Any, Literal, Type, Union
 
-from pydantic import BaseModel, Field, conlist, constr, create_model
+from pydantic import (
+    BaseModel,
+    ConstrainedStr,
+    Field,
+    conlist,
+    constr,
+    create_model,
+)
 
 if TYPE_CHECKING:
     ID = str
@@ -63,6 +70,15 @@ def enum_model(
         to_classname(name),
         __root__=(Literal[name], field(*args, fold=fold, **kwargs)),  # type: ignore
         __base__=BaseModel,
+    )
+
+
+def id_with(name: str, regex: re.Pattern[str]) -> Type[ConstrainedStr]:
+    """creates a constrained regex string"""
+    return create_model( # type: ignore
+        to_classname(name),
+        regex=regex,
+        __base__=ConstrainedStr,  # type: ignore
     )
 
 
