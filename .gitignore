@@ -1,6 +1,5 @@
 out
 dist
-example
 node_modules
 .vscode-test/
 *.vsix

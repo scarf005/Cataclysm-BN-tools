@@ -12,6 +12,10 @@
     {
       "fileMatch": ["example/modinfo.json"],
       "url": "./data/modinfo.json"
+    },
+    {
+      "fileMatch": ["example/tileinfo.json"],
+      "url": "./data/tileinfo.json"
     }
   ]
 }
