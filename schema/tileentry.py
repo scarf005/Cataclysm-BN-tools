@@ -1,4 +1,3 @@
-from datamodel_code_generator import LiteralType
 from pydantic import BaseModel
 from typing_extensions import LiteralString
 
@@ -7,6 +6,7 @@ from schema.utils import ID, RegexType, field, id_from, reqfield
 NPCS_DESC = """
     {id} are used to identify
     the sprites for the **player avatar** and **NPC**s."""
+
 NPCS = id_from(
     "NPCS",
     NPCS_DESC,
@@ -16,8 +16,8 @@ NPCS = id_from(
 SEASON_DESC = """
     {id} can be applied to any entity id to create a **seasonal variant** for that entity that will be displayed in the appropriate season like this:
 
-    "id": "mon_wolf_season_winter".
-    """
+    "id": "mon_wolf_season_winter"."""
+
 SEASON = id_from(
     "Season",
     SEASON_DESC,
@@ -29,6 +29,7 @@ SEASON = id_from(
 UNKNOWN_DESC = """
     {id} provides a sprite
     that is displayed when an entity has no other sprite."""
+
 UNKNOWN = id_from("UNKNOWN", UNKNOWN_DESC, ("unknown",))
 
 
@@ -41,16 +42,19 @@ def overlay(text: str, desc: str):
 OVERLAY_MUTATION_DESC = """
     {id} can prefix any trait or bionic in the game to specify an overlay image
     that will be laid over the player and NPC sprites to indicate they have that mutation or bionic."""
+
 OVERLAY_MUTATION = overlay("mutation", OVERLAY_MUTATION_DESC)
 
 OVERLAY_WORN_DESC = """
     {id} can prefix any item in the game to specify an overlay image
     that will be laid over the player and NPC sprites to indicate they are wearing that item."""
+
 OVERLAY_WORN = overlay("worn", OVERLAY_WORN_DESC)
 
 OVERLAY_WIELDED_DESC = """
     {id} can prefix any item in the game to specify an overlay image
     that will be laid over the player and NPC sprites to indicate they are holding that item."""
+
 OVERLAY_WIELDED = overlay("wielded", OVERLAY_WIELDED_DESC)
 
 OverlayID = OVERLAY_MUTATION | OVERLAY_WORN | OVERLAY_WIELDED
