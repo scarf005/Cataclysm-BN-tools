@@ -20,6 +20,15 @@
         },
         {
           "$ref": "#/definitions/Season"
+        },
+        {
+          "$ref": "#/definitions/Overlaymutation"
+        },
+        {
+          "$ref": "#/definitions/Overlayworn"
+        },
+        {
+          "$ref": "#/definitions/Overlaywielded"
         }
       ]
     },
@@ -103,6 +112,63 @@
         {
           "type": "string",
           "pattern": "^[a-zA-Z0-9_]+_fall$"
+        }
+      ]
+    },
+    "Overlaymutation": {
+      "title": "Overlaymutation",
+      "description": "The special prefixes `overlay_mutation`, `overlay_female_mutation`, `overlay_male_mutation` can prefix any trait or bionic in the game to specify an overlay image that will be laid over the player and NPC sprites to indicate they have that mutation or bionic.",
+      "markdownDescription": "The special prefixes `overlay_mutation`, `overlay_female_mutation`, `overlay_male_mutation` can prefix any trait or bionic in the game to specify an overlay image that will be laid over the player and NPC sprites to indicate they have that mutation or bionic.",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^overlay_mutation_[a-zA-Z0-9_]+"
+        },
+        {
+          "type": "string",
+          "pattern": "^overlay_female_mutation_[a-zA-Z0-9_]+"
+        },
+        {
+          "type": "string",
+          "pattern": "^overlay_male_mutation_[a-zA-Z0-9_]+"
+        }
+      ]
+    },
+    "Overlayworn": {
+      "title": "Overlayworn",
+      "description": "The special prefixes `overlay_worn`, `overlay_female_worn`, `overlay_male_worn` can prefix any item in the game to specify an overlay image that will be laid over the player and NPC sprites to indicate they are wearing that item.",
+      "markdownDescription": "The special prefixes `overlay_worn`, `overlay_female_worn`, `overlay_male_worn` can prefix any item in the game to specify an overlay image that will be laid over the player and NPC sprites to indicate they are wearing that item.",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^overlay_worn_[a-zA-Z0-9_]+"
+        },
+        {
+          "type": "string",
+          "pattern": "^overlay_female_worn_[a-zA-Z0-9_]+"
+        },
+        {
+          "type": "string",
+          "pattern": "^overlay_male_worn_[a-zA-Z0-9_]+"
+        }
+      ]
+    },
+    "Overlaywielded": {
+      "title": "Overlaywielded",
+      "description": "The special prefixes `overlay_wielded`, `overlay_female_wielded`, `overlay_male_wielded` can prefix any item in the game to specify an overlay image that will be laid over the player and NPC sprites to indicate they are holding that item.",
+      "markdownDescription": "The special prefixes `overlay_wielded`, `overlay_female_wielded`, `overlay_male_wielded` can prefix any item in the game to specify an overlay image that will be laid over the player and NPC sprites to indicate they are holding that item.",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^overlay_wielded_[a-zA-Z0-9_]+"
+        },
+        {
+          "type": "string",
+          "pattern": "^overlay_female_wielded_[a-zA-Z0-9_]+"
+        },
+        {
+          "type": "string",
+          "pattern": "^overlay_male_wielded_[a-zA-Z0-9_]+"
         }
       ]
     }

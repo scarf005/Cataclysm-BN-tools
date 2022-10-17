@@ -1,4 +1,6 @@
+from datamodel_code_generator import LiteralType
 from pydantic import BaseModel
+from typing_extensions import LiteralString
 
 from schema.utils import ID, RegexType, field, id_from, reqfield
 
@@ -30,7 +32,29 @@ UNKNOWN_DESC = """
 UNKNOWN = id_from("UNKNOWN", UNKNOWN_DESC, ("unknown",))
 
 
-SpecialID = NPCS | UNKNOWN | SEASON
+def overlay(text: str, desc: str):
+    names: tuple[LiteralString, ...] = tuple(f"overlay{t}_{text}" for t in ("", "_female", "_male"))  # type: ignore
+
+    return id_from(f"Overlay{text.capitalize()}", desc, names, RegexType.PREFIX)
+
+
+OVERLAY_MUTATION_DESC = """
+    {id} can prefix any trait or bionic in the game to specify an overlay image
+    that will be laid over the player and NPC sprites to indicate they have that mutation or bionic."""
+OVERLAY_MUTATION = overlay("mutation", OVERLAY_MUTATION_DESC)
+
+OVERLAY_WORN_DESC = """
+    {id} can prefix any item in the game to specify an overlay image
+    that will be laid over the player and NPC sprites to indicate they are wearing that item."""
+OVERLAY_WORN = overlay("worn", OVERLAY_WORN_DESC)
+
+OVERLAY_WIELDED_DESC = """
+    {id} can prefix any item in the game to specify an overlay image
+    that will be laid over the player and NPC sprites to indicate they are holding that item."""
+OVERLAY_WIELDED = overlay("wielded", OVERLAY_WIELDED_DESC)
+
+OverlayID = OVERLAY_MUTATION | OVERLAY_WORN | OVERLAY_WIELDED
+SpecialID = NPCS | UNKNOWN | SEASON | OverlayID
 
 
 class TileEntry(BaseModel):
