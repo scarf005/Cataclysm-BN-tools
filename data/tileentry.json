@@ -12,6 +12,13 @@
     }
   ],
   "definitions": {
+    "Terrain": {
+      "title": "Terrain",
+      "description": "The special prefix `t` indicates terrain",
+      "markdownDescription": "The special prefix `t` indicates terrain",
+      "pattern": "^t_[a-zA-Z0-9_]+",
+      "type": "string"
+    },
     "Npcs": {
       "title": "Npcs",
       "description": "The special ids `player_female`, `player_male`, `npc_female`, `npc_male` are used to identify the sprites for the **player avatar** and **NPC**s.",
@@ -137,6 +144,9 @@
               "pattern": "^[a-zA-Z0-9_]+$"
             },
             {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
               "$ref": "#/definitions/Npcs"
             },
             {
@@ -175,15 +185,16 @@
         "rotates": {
           "title": "Rotates",
           "description": "true for things that rotate like vehicle parts",
-          "default": false,
           "markdownDescription": "true for things that rotate like vehicle parts",
+          "required": true,
           "type": "boolean"
         }
       },
       "required": [
         "id",
         "fg",
-        "bg"
+        "bg",
+        "rotates"
       ]
     }
   }

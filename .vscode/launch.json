@@ -29,6 +29,12 @@
 				"${workspaceFolder}/out/test/**/*.js"
 			],
 			"preLaunchTask": "${defaultBuildTask}"
-		}
+		},
+    {
+      "name": "Generate JSON Schema",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/gen_schema.py",
+    }
 	]
 }

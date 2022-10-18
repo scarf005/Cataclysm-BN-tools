@@ -1,7 +1,7 @@
-from pydantic import BaseModel
-from typing_extensions import LiteralString
+from distutils.sysconfig import PREFIX
 
-from schema.utils import ID, RegexType, field, id_from, reqfield
+from schema.utils import ID, RegexType, id_from
+from typing_extensions import LiteralString
 
 NPCS_DESC = """
     {id} are used to identify
@@ -32,6 +32,7 @@ UNKNOWN_DESC = """
 
 UNKNOWN = id_from("UNKNOWN", UNKNOWN_DESC, ("unknown",))
 
+TERRAIN = id_from("Terrain", "{id} indicates terrain", ("t",), RegexType.PREFIX)
 
 def overlay(text: str, desc: str):
     names: tuple[LiteralString, ...] = tuple(f"overlay{t}_{text}" for t in ("", "_female", "_male"))  # type: ignore
@@ -59,12 +60,4 @@ OVERLAY_WIELDED = overlay("wielded", OVERLAY_WIELDED_DESC)
 
 OverlayID = OVERLAY_MUTATION | OVERLAY_WORN | OVERLAY_WIELDED
 SpecialID = NPCS | UNKNOWN | SEASON | OverlayID
-
-
-class TileEntry(BaseModel):
-    id_: ID | SpecialID = reqfield(  # type: ignore
-        "the `game entity` represented by this sprite", alias="id"
-    )
-    fg: ID = reqfield("sprite name")
-    bg: ID = reqfield("background sprite name, **always** a single value")
-    rotates = field(False, "true for things that rotate like vehicle parts")
+TileID = ID | TERRAIN | SpecialID

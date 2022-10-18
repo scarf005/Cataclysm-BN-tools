@@ -1,5 +1,5 @@
 from schema.modinfo import ModInfo
-from schema.tileentry import TileEntry
+from schema.tile_entry import TileEntry
 
 from schema.utils import object_or_list
 

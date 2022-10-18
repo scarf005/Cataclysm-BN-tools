@@ -7,6 +7,7 @@ from pydantic import (
     BaseModel,
     ConstrainedStr,
     Field,
+    conint,
     conlist,
     constr,
     create_model,
@@ -17,10 +18,12 @@ if TYPE_CHECKING:
     ID = str
     JStr = str
     JList = list
+    JPositive = int
 else:
     ID = constr(regex=r"^[a-zA-Z0-9_]+$")
     JStr = constr(min_length=1)
     JList = conlist(min_items=1, item_type=JStr)
+    JPositive = conint(gt=0)
 
 
 def to_classname(text: str) -> str:
