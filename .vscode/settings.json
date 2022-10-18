@@ -14,8 +14,8 @@
       "url": "./data/modinfo.json"
     },
     {
-      "fileMatch": ["example/tileinfo/*.json"],
-      "url": "./data/tileinfo.json"
+      "fileMatch": ["example/tileentry/*.json"],
+      "url": "./data/tileentry.json"
     }
   ]
 }

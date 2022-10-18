@@ -1,65 +1,15 @@
 {
-  "title": "TileEntry",
-  "type": "object",
-  "properties": {
-    "id": {
-      "title": "Id",
-      "description": "the `game entity` represented by this sprite",
-      "markdownDescription": "the `game entity` represented by this sprite",
-      "required": true,
-      "anyOf": [
-        {
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9_]+$"
-        },
-        {
-          "$ref": "#/definitions/Npcs"
-        },
-        {
-          "$ref": "#/definitions/Unknown"
-        },
-        {
-          "$ref": "#/definitions/Season"
-        },
-        {
-          "$ref": "#/definitions/Overlaymutation"
-        },
-        {
-          "$ref": "#/definitions/Overlayworn"
-        },
-        {
-          "$ref": "#/definitions/Overlaywielded"
-        }
-      ]
+  "title": "Tileentryfile",
+  "anyOf": [
+    {
+      "$ref": "#/definitions/TileEntry"
     },
-    "fg": {
-      "title": "Fg",
-      "description": "sprite name",
-      "markdownDescription": "sprite name",
-      "required": true,
-      "pattern": "^[a-zA-Z0-9_]+$",
-      "type": "string"
-    },
-    "bg": {
-      "title": "Bg",
-      "description": "background sprite name, **always** a single value",
-      "markdownDescription": "background sprite name, **always** a single value",
-      "required": true,
-      "pattern": "^[a-zA-Z0-9_]+$",
-      "type": "string"
-    },
-    "rotates": {
-      "title": "Rotates",
-      "description": "true for things that rotate like vehicle parts",
-      "default": false,
-      "markdownDescription": "true for things that rotate like vehicle parts",
-      "type": "boolean"
+    {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TileEntry"
+      }
     }
-  },
-  "required": [
-    "id",
-    "fg",
-    "bg"
   ],
   "definitions": {
     "Npcs": {
@@ -94,8 +44,8 @@
     },
     "Season": {
       "title": "Season",
-      "description": "The special suffixes `spring`, `summer`, `winter`, `fall` can be applied to any entity id to create a **seasonal variant** for that entity that will be displayed in the appropriate season like this:\n\n    \"id\": \"mon_wolf_season_winter\".\n",
-      "markdownDescription": "The special suffixes `spring`, `summer`, `winter`, `fall` can be applied to any entity id to create a **seasonal variant** for that entity that will be displayed in the appropriate season like this:\n\n    \"id\": \"mon_wolf_season_winter\".\n",
+      "description": "The special suffixes `spring`, `summer`, `winter`, `fall` can be applied to any entity id to create a **seasonal variant** for that entity that will be displayed in the appropriate season like this:\n\n    \"id\": \"mon_wolf_season_winter\".",
+      "markdownDescription": "The special suffixes `spring`, `summer`, `winter`, `fall` can be applied to any entity id to create a **seasonal variant** for that entity that will be displayed in the appropriate season like this:\n\n    \"id\": \"mon_wolf_season_winter\".",
       "anyOf": [
         {
           "type": "string",
@@ -170,6 +120,70 @@
           "type": "string",
           "pattern": "^overlay_male_wielded_[a-zA-Z0-9_]+"
         }
+      ]
+    },
+    "TileEntry": {
+      "title": "TileEntry",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "description": "the `game entity` represented by this sprite",
+          "markdownDescription": "the `game entity` represented by this sprite",
+          "required": true,
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            }
+          ]
+        },
+        "fg": {
+          "title": "Fg",
+          "description": "sprite name",
+          "markdownDescription": "sprite name",
+          "required": true,
+          "pattern": "^[a-zA-Z0-9_]+$",
+          "type": "string"
+        },
+        "bg": {
+          "title": "Bg",
+          "description": "background sprite name, **always** a single value",
+          "markdownDescription": "background sprite name, **always** a single value",
+          "required": true,
+          "pattern": "^[a-zA-Z0-9_]+$",
+          "type": "string"
+        },
+        "rotates": {
+          "title": "Rotates",
+          "description": "true for things that rotate like vehicle parts",
+          "default": false,
+          "markdownDescription": "true for things that rotate like vehicle parts",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "fg",
+        "bg"
       ]
     }
   }
