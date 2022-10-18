@@ -8,11 +8,11 @@ This extension adds JSON validation support for Cataclysm: Bright Nights develop
 
 ### `modinfo.json` validation
 
-![](./images/modinfo.gif)
+![](https://github.com/scarf005/Cataclysm-BN-tools/blob/main/images/modinfo.gif)
 
 ### `tile_entry:id` validation
 
-![](./images/tile_entry.gif)
+![](https://github.com/scarf005/Cataclysm-BN-tools/blob/main/images/tile_entry.gif)
 
 ## Extension Settings
 
