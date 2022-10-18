@@ -1,10 +1,9 @@
-
-from pydantic import BaseModel
-
 from schema.modinfo import ModInfo
+from schema.tileentry import TileEntry
 
+from schema.utils import object_or_list
 
 JsonTypes = ModInfo
 
-class JsonFile(BaseModel):
-    __root__: JsonTypes | list[JsonTypes] # type: ignore
+JsonFile = object_or_list("JsonFile", JsonTypes)
+TileEntryFile = object_or_list("TileEntryFile", TileEntry)

@@ -2,7 +2,6 @@ import re
 from enum import StrEnum
 from textwrap import dedent
 from typing import TYPE_CHECKING, Any, Literal, Type, Union
-from typing_extensions import LiteralString
 
 from pydantic import (
     BaseModel,
@@ -12,6 +11,7 @@ from pydantic import (
     constr,
     create_model,
 )
+from typing_extensions import LiteralString
 
 if TYPE_CHECKING:
     ID = str
@@ -131,5 +131,13 @@ def id_from(
     return create_model(
         to_classname(name),
         __root__=(IDsType, field(desc, **kwargs)),
+        __base__=BaseModel,
+    )
+
+
+def object_or_list(name: str, model: Type["BaseModel"]):
+    return create_model(
+        to_classname(name),
+        __root__=(model | list[model], ...), # type: ignore
         __base__=BaseModel,
     )
