@@ -129,6 +129,224 @@
         }
       ]
     },
+    "Image": {
+      "title": "Image",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_]+$"
+        },
+        {
+          "$ref": "#/definitions/Terrain"
+        },
+        {
+          "$ref": "#/definitions/Npcs"
+        },
+        {
+          "$ref": "#/definitions/Unknown"
+        },
+        {
+          "$ref": "#/definitions/Season"
+        },
+        {
+          "$ref": "#/definitions/Overlaymutation"
+        },
+        {
+          "$ref": "#/definitions/Overlayworn"
+        },
+        {
+          "$ref": "#/definitions/Overlaywielded"
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_]+$"
+                },
+                {
+                  "$ref": "#/definitions/Terrain"
+                },
+                {
+                  "$ref": "#/definitions/Npcs"
+                },
+                {
+                  "$ref": "#/definitions/Unknown"
+                },
+                {
+                  "$ref": "#/definitions/Season"
+                },
+                {
+                  "$ref": "#/definitions/Overlaymutation"
+                },
+                {
+                  "$ref": "#/definitions/Overlayworn"
+                },
+                {
+                  "$ref": "#/definitions/Overlaywielded"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_]+$"
+                },
+                {
+                  "$ref": "#/definitions/Terrain"
+                },
+                {
+                  "$ref": "#/definitions/Npcs"
+                },
+                {
+                  "$ref": "#/definitions/Unknown"
+                },
+                {
+                  "$ref": "#/definitions/Season"
+                },
+                {
+                  "$ref": "#/definitions/Overlaymutation"
+                },
+                {
+                  "$ref": "#/definitions/Overlayworn"
+                },
+                {
+                  "$ref": "#/definitions/Overlaywielded"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_]+$"
+                },
+                {
+                  "$ref": "#/definitions/Terrain"
+                },
+                {
+                  "$ref": "#/definitions/Npcs"
+                },
+                {
+                  "$ref": "#/definitions/Unknown"
+                },
+                {
+                  "$ref": "#/definitions/Season"
+                },
+                {
+                  "$ref": "#/definitions/Overlaymutation"
+                },
+                {
+                  "$ref": "#/definitions/Overlayworn"
+                },
+                {
+                  "$ref": "#/definitions/Overlaywielded"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_]+$"
+                },
+                {
+                  "$ref": "#/definitions/Terrain"
+                },
+                {
+                  "$ref": "#/definitions/Npcs"
+                },
+                {
+                  "$ref": "#/definitions/Unknown"
+                },
+                {
+                  "$ref": "#/definitions/Season"
+                },
+                {
+                  "$ref": "#/definitions/Overlaymutation"
+                },
+                {
+                  "$ref": "#/definitions/Overlayworn"
+                },
+                {
+                  "$ref": "#/definitions/Overlaywielded"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_]+$"
+                },
+                {
+                  "$ref": "#/definitions/Terrain"
+                },
+                {
+                  "$ref": "#/definitions/Npcs"
+                },
+                {
+                  "$ref": "#/definitions/Unknown"
+                },
+                {
+                  "$ref": "#/definitions/Season"
+                },
+                {
+                  "$ref": "#/definitions/Overlaymutation"
+                },
+                {
+                  "$ref": "#/definitions/Overlayworn"
+                },
+                {
+                  "$ref": "#/definitions/Overlaywielded"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_]+$"
+                },
+                {
+                  "$ref": "#/definitions/Terrain"
+                },
+                {
+                  "$ref": "#/definitions/Npcs"
+                },
+                {
+                  "$ref": "#/definitions/Unknown"
+                },
+                {
+                  "$ref": "#/definitions/Season"
+                },
+                {
+                  "$ref": "#/definitions/Overlaymutation"
+                },
+                {
+                  "$ref": "#/definitions/Overlayworn"
+                },
+                {
+                  "$ref": "#/definitions/Overlaywielded"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "TileEntry": {
       "title": "TileEntry",
       "type": "object",
@@ -171,16 +389,22 @@
           "description": "sprite name",
           "markdownDescription": "sprite name",
           "required": true,
-          "pattern": "^[a-zA-Z0-9_]+$",
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/definitions/Image"
+            }
+          ]
         },
         "bg": {
           "title": "Bg",
           "description": "background sprite name, **always** a single value",
           "markdownDescription": "background sprite name, **always** a single value",
           "required": true,
-          "pattern": "^[a-zA-Z0-9_]+$",
-          "type": "string"
+          "allOf": [
+            {
+              "$ref": "#/definitions/Image"
+            }
+          ]
         },
         "rotates": {
           "title": "Rotates",

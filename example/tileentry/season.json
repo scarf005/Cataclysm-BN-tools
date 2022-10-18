@@ -1,5 +1,6 @@
 {
   "id": "foo_season_spring",
   "fg": "foo",
-  "bg": "bar"
+  "bg": "bar",
+  "rotates": false
 }

@@ -1,5 +1,6 @@
 {
   "id": "overlay_female_wielded_foo",
   "fg": "foo",
-  "bg": "bar"
+  "bg": "bar",
+  "rotates": false
 }
