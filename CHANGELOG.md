@@ -1,5 +1,12 @@
 # Changelog
 
+# [1.2.0](https://github.com/scarf005/Cataclysm-BN-tools/compare/v1.1.2...v1.2.0) (2022-10-19)
+
+
+### Features
+
+* weighted entry and stuff ([8429214](https://github.com/scarf005/Cataclysm-BN-tools/commit/8429214a7824b68cfa1243dbbc7bca8a9323b5ca))
+
 ## [1.1.2](https://github.com/scarf005/Cataclysm-BN-tools/compare/v1.1.1...v1.1.2) (2022-10-18)
 
 ## [1.1.1](https://github.com/scarf005/Cataclysm-BN-tools/compare/v1.1.0...v1.1.1) (2022-10-17)
