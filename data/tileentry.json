@@ -2,12 +2,12 @@
   "title": "Tileentryfile",
   "anyOf": [
     {
-      "$ref": "#/definitions/TileEntry"
+      "$ref": "#/definitions/TileEntryTypes"
     },
     {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/TileEntry"
+        "$ref": "#/definitions/TileEntryTypes"
       }
     }
   ],
@@ -129,222 +129,585 @@
         }
       ]
     },
-    "Image": {
-      "title": "Image",
-      "anyOf": [
+    "SingleImageArray": {
+      "title": "SingleImageArray",
+      "description": "A single image. why not just use a string instead?",
+      "markdownDescription": "A single image. why not just use a string instead?",
+      "deprecated": true,
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": [
         {
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9_]+$"
-        },
-        {
-          "$ref": "#/definitions/Terrain"
-        },
-        {
-          "$ref": "#/definitions/Npcs"
-        },
-        {
-          "$ref": "#/definitions/Unknown"
-        },
-        {
-          "$ref": "#/definitions/Season"
-        },
-        {
-          "$ref": "#/definitions/Overlaymutation"
-        },
-        {
-          "$ref": "#/definitions/Overlayworn"
-        },
-        {
-          "$ref": "#/definitions/Overlaywielded"
-        },
-        {
-          "type": "array",
-          "minItems": 2,
-          "maxItems": 2,
-          "items": [
+          "anyOf": [
             {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "pattern": "^[a-zA-Z0-9_]+$"
-                },
-                {
-                  "$ref": "#/definitions/Terrain"
-                },
-                {
-                  "$ref": "#/definitions/Npcs"
-                },
-                {
-                  "$ref": "#/definitions/Unknown"
-                },
-                {
-                  "$ref": "#/definitions/Season"
-                },
-                {
-                  "$ref": "#/definitions/Overlaymutation"
-                },
-                {
-                  "$ref": "#/definitions/Overlayworn"
-                },
-                {
-                  "$ref": "#/definitions/Overlaywielded"
-                }
-              ]
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
             },
             {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "pattern": "^[a-zA-Z0-9_]+$"
-                },
-                {
-                  "$ref": "#/definitions/Terrain"
-                },
-                {
-                  "$ref": "#/definitions/Npcs"
-                },
-                {
-                  "$ref": "#/definitions/Unknown"
-                },
-                {
-                  "$ref": "#/definitions/Season"
-                },
-                {
-                  "$ref": "#/definitions/Overlaymutation"
-                },
-                {
-                  "$ref": "#/definitions/Overlayworn"
-                },
-                {
-                  "$ref": "#/definitions/Overlaywielded"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "array",
-          "minItems": 4,
-          "maxItems": 4,
-          "items": [
-            {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "pattern": "^[a-zA-Z0-9_]+$"
-                },
-                {
-                  "$ref": "#/definitions/Terrain"
-                },
-                {
-                  "$ref": "#/definitions/Npcs"
-                },
-                {
-                  "$ref": "#/definitions/Unknown"
-                },
-                {
-                  "$ref": "#/definitions/Season"
-                },
-                {
-                  "$ref": "#/definitions/Overlaymutation"
-                },
-                {
-                  "$ref": "#/definitions/Overlayworn"
-                },
-                {
-                  "$ref": "#/definitions/Overlaywielded"
-                }
-              ]
+              "$ref": "#/definitions/Terrain"
             },
             {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "pattern": "^[a-zA-Z0-9_]+$"
-                },
-                {
-                  "$ref": "#/definitions/Terrain"
-                },
-                {
-                  "$ref": "#/definitions/Npcs"
-                },
-                {
-                  "$ref": "#/definitions/Unknown"
-                },
-                {
-                  "$ref": "#/definitions/Season"
-                },
-                {
-                  "$ref": "#/definitions/Overlaymutation"
-                },
-                {
-                  "$ref": "#/definitions/Overlayworn"
-                },
-                {
-                  "$ref": "#/definitions/Overlaywielded"
-                }
-              ]
+              "$ref": "#/definitions/Npcs"
             },
             {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "pattern": "^[a-zA-Z0-9_]+$"
-                },
-                {
-                  "$ref": "#/definitions/Terrain"
-                },
-                {
-                  "$ref": "#/definitions/Npcs"
-                },
-                {
-                  "$ref": "#/definitions/Unknown"
-                },
-                {
-                  "$ref": "#/definitions/Season"
-                },
-                {
-                  "$ref": "#/definitions/Overlaymutation"
-                },
-                {
-                  "$ref": "#/definitions/Overlayworn"
-                },
-                {
-                  "$ref": "#/definitions/Overlaywielded"
-                }
-              ]
+              "$ref": "#/definitions/Unknown"
             },
             {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "pattern": "^[a-zA-Z0-9_]+$"
-                },
-                {
-                  "$ref": "#/definitions/Terrain"
-                },
-                {
-                  "$ref": "#/definitions/Npcs"
-                },
-                {
-                  "$ref": "#/definitions/Unknown"
-                },
-                {
-                  "$ref": "#/definitions/Season"
-                },
-                {
-                  "$ref": "#/definitions/Overlaymutation"
-                },
-                {
-                  "$ref": "#/definitions/Overlayworn"
-                },
-                {
-                  "$ref": "#/definitions/Overlaywielded"
-                }
-              ]
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
             }
           ]
         }
+      ]
+    },
+    "LeftRightImage": {
+      "title": "LeftRightImage",
+      "description": "`left` and `right`",
+      "markdownDescription": "`left` and `right`",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": [
+        {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            }
+          ]
+        }
+      ]
+    },
+    "FourRotateImage": {
+      "title": "FourRotateImage",
+      "description": "`north`, `east`, `south`, `west`",
+      "markdownDescription": "`north`, `east`, `south`, `west`",
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": [
+        {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            }
+          ]
+        }
+      ]
+    },
+    "WeightedEntry": {
+      "title": "WeightedEntry",
+      "type": "object",
+      "properties": {
+        "weight": {
+          "title": "Weight",
+          "description": "The weight of this entry",
+          "markdownDescription": "The weight of this entry",
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        "sprite": {
+          "title": "Sprite",
+          "description": "The sprite to use",
+          "markdownDescription": "The sprite to use",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            }
+          ]
+        }
+      },
+      "required": [
+        "weight",
+        "sprite"
+      ]
+    },
+    "WeightedArray": {
+      "title": "WeightedArray",
+      "description": "A list of weighted entries",
+      "markdownDescription": "A list of weighted entries",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/WeightedEntry"
+      }
+    },
+    "AdditionalTileEntry": {
+      "title": "AdditionalTileEntry",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "description": "Each dictionary in the list has an `id` field",
+          "markdownDescription": "Each dictionary in the list has an `id` field",
+          "required": true,
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            }
+          ]
+        },
+        "fg": {
+          "title": "Fg",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            },
+            {
+              "$ref": "#/definitions/SingleImageArray"
+            },
+            {
+              "$ref": "#/definitions/LeftRightImage"
+            },
+            {
+              "$ref": "#/definitions/FourRotateImage"
+            },
+            {
+              "$ref": "#/definitions/WeightedArray"
+            }
+          ]
+        },
+        "bg": {
+          "title": "Bg",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            },
+            {
+              "$ref": "#/definitions/SingleImageArray"
+            },
+            {
+              "$ref": "#/definitions/LeftRightImage"
+            },
+            {
+              "$ref": "#/definitions/FourRotateImage"
+            },
+            {
+              "$ref": "#/definitions/WeightedArray"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "fg"
+      ]
+    },
+    "MultiTileEntry": {
+      "title": "MultiTileEntry",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "description": "the `game entity` represented by this sprite",
+          "markdownDescription": "the `game entity` represented by this sprite",
+          "required": true,
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            }
+          ]
+        },
+        "fg": {
+          "title": "Fg",
+          "description": "sprite name",
+          "markdownDescription": "sprite name",
+          "required": true,
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            },
+            {
+              "$ref": "#/definitions/SingleImageArray"
+            },
+            {
+              "$ref": "#/definitions/LeftRightImage"
+            },
+            {
+              "$ref": "#/definitions/FourRotateImage"
+            },
+            {
+              "$ref": "#/definitions/WeightedArray"
+            }
+          ]
+        },
+        "bg": {
+          "title": "Bg",
+          "description": "background sprite name, **always** a single value",
+          "markdownDescription": "background sprite name, **always** a single value",
+          "required": true,
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            },
+            {
+              "$ref": "#/definitions/SingleImageArray"
+            },
+            {
+              "$ref": "#/definitions/LeftRightImage"
+            },
+            {
+              "$ref": "#/definitions/FourRotateImage"
+            },
+            {
+              "$ref": "#/definitions/WeightedArray"
+            }
+          ]
+        },
+        "rotates": {
+          "title": "Rotates",
+          "description": "true for things that rotate like vehicle parts",
+          "markdownDescription": "true for things that rotate like vehicle parts",
+          "required": true,
+          "type": "boolean"
+        },
+        "multitile": {
+          "title": "Multitile",
+          "description": "`\"multitle\"` is an *optional* field. If it is present and `true`, there must be an `additional_tiles` list with 1 or more dictionaries for entities and sprites associated with this tile, such as broken versions of an item or wall connections ",
+          "default": true,
+          "const": true,
+          "markdownDescription": "`\"multitle\"` is an *optional* field. If it is present and `true`, there must be an `additional_tiles` list with 1 or more dictionaries for entities and sprites associated with this tile, such as broken versions of an item or wall connections ",
+          "require": true,
+          "type": "boolean"
+        },
+        "additional_tiles": {
+          "title": "Additional Tiles",
+          "description": "additional tiles",
+          "markdownDescription": "additional tiles",
+          "required": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalTileEntry"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "fg",
+        "bg",
+        "rotates",
+        "additional_tiles"
       ]
     },
     "TileEntry": {
@@ -389,9 +752,43 @@
           "description": "sprite name",
           "markdownDescription": "sprite name",
           "required": true,
-          "allOf": [
+          "anyOf": [
             {
-              "$ref": "#/definitions/Image"
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            },
+            {
+              "$ref": "#/definitions/SingleImageArray"
+            },
+            {
+              "$ref": "#/definitions/LeftRightImage"
+            },
+            {
+              "$ref": "#/definitions/FourRotateImage"
+            },
+            {
+              "$ref": "#/definitions/WeightedArray"
             }
           ]
         },
@@ -400,9 +797,43 @@
           "description": "background sprite name, **always** a single value",
           "markdownDescription": "background sprite name, **always** a single value",
           "required": true,
-          "allOf": [
+          "anyOf": [
             {
-              "$ref": "#/definitions/Image"
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_]+$"
+            },
+            {
+              "$ref": "#/definitions/Terrain"
+            },
+            {
+              "$ref": "#/definitions/Npcs"
+            },
+            {
+              "$ref": "#/definitions/Unknown"
+            },
+            {
+              "$ref": "#/definitions/Season"
+            },
+            {
+              "$ref": "#/definitions/Overlaymutation"
+            },
+            {
+              "$ref": "#/definitions/Overlayworn"
+            },
+            {
+              "$ref": "#/definitions/Overlaywielded"
+            },
+            {
+              "$ref": "#/definitions/SingleImageArray"
+            },
+            {
+              "$ref": "#/definitions/LeftRightImage"
+            },
+            {
+              "$ref": "#/definitions/FourRotateImage"
+            },
+            {
+              "$ref": "#/definitions/WeightedArray"
             }
           ]
         },
@@ -412,6 +843,16 @@
           "markdownDescription": "true for things that rotate like vehicle parts",
           "required": true,
           "type": "boolean"
+        },
+        "multitile": {
+          "title": "Multitile",
+          "description": "`\"multitle\"` is an *optional* field. If it is present and `true`, there must be an `additional_tiles` list with 1 or more dictionaries for entities and sprites associated with this tile, such as broken versions of an item or wall connections ",
+          "default": false,
+          "markdownDescription": "`\"multitle\"` is an *optional* field. If it is present and `true`, there must be an `additional_tiles` list with 1 or more dictionaries for entities and sprites associated with this tile, such as broken versions of an item or wall connections ",
+          "enum": [
+            false
+          ],
+          "type": "boolean"
         }
       },
       "required": [
@@ -419,6 +860,17 @@
         "fg",
         "bg",
         "rotates"
+      ]
+    },
+    "TileEntryTypes": {
+      "title": "TileEntryTypes",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/MultiTileEntry"
+        },
+        {
+          "$ref": "#/definitions/TileEntry"
+        }
       ]
     }
   }

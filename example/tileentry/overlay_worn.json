@@ -1,6 +1,11 @@
 {
   "id": "overlay_female_worn_foo",
-  "fg": "foo",
+  "fg": [
+    { "weight": 50, "sprite": "t_dirt_brown" },
+    { "weight": 1, "sprite": "t_dirt_black_specks" },
+    { "weight": 1, "sprite": "t_dirt_specks_gray" },
+    { "weight": 1, "sprite": "t_patchy_grass" }
+  ],
   "bg": "bar",
   "rotates": false
 }

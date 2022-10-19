@@ -1,6 +1,6 @@
 {
   "id": "t_grass",
-  "fg": ["t_grass"],
+  "fg": "t_grass",
   "bg": ["bg_dirt"],
   "rotates": false,
   "multitile": true,

@@ -141,6 +141,6 @@ def id_from(
 def object_or_list(name: str, model: Type["BaseModel"]):
     return create_model(
         to_classname(name),
-        __root__=(model | list[model], ...), # type: ignore
+        __root__=(model | list[model], ...),  # type: ignore
         __base__=BaseModel,
     )
